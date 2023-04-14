@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import UrlListItems from "./UrlListItems";
-
+import  Validator  from "validator";
 const getlocalSearches = function () {
   let list = localStorage.getItem("serches");
   if (list) {
@@ -20,9 +20,14 @@ function SearchBar() {
   };
   // creating an array of data's
   const setValue = () => {
-    setItemData((olddata) => {
+    if(Validator.isURL(inputVal)) {
+      setItemData((olddata) => {
       return [...olddata, inputVal];
     });
+    }
+    else {
+      alert("Please Enter valid url");
+    }
     setInputVal("");
   };
 
